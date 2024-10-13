@@ -68,7 +68,6 @@ projects = {
 
 Object.keys(projects).forEach((key) => {
   const project = projects[key];
-  console.log(key);
 
   var new_art = `
     <div class="col">

@@ -20,7 +20,7 @@ $("#submitButtonId").click(function () {
   $.ajax({
     type: "POST",
     url: url,
-    contentType: 'multipart/form-data',
+    contentType: false,
     headers: {
       'Authorization': `Bearer ${bearerToken}`
     },

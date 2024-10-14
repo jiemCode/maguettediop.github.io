@@ -17,21 +17,30 @@ $("#submitButtonId").click(function () {
 
   var bearerToken = "lIuGU1fkl2yb1GwKKhSyXj34DOWiMDITdaaL9nkTZNQhFoe8TlZgb3NKPTTXWVPL"
 
-  $.ajax({
+  // Collect form data and convert to JSON
+const formData = $("#idForm").serializeArray();
+const jsonData = {};
+
+formData.forEach(function(item) {
+    jsonData[item.name] = item.value;
+});
+
+// AJAX request
+$.ajax({
     type: "POST",
     url: url,
     contentType: 'application/json',
     headers: {
-      'Authorization': `Bearer ${bearerToken}`
+        'Authorization': `Bearer ${bearerToken}`
     },
-    data: $("#idForm").serialize(),
+    data: JSON.stringify(jsonData),  // Convert the object to a JSON string
     success: function (data) {
-      showSuccessMessage("Message envoyé ! Merci", "#4CAF50");
+        showSuccessMessage("Message envoyé ! Merci", "#4CAF50");
     },
     error: function (data) {
-      showSuccessMessage("Erreur d'envoi du message ?!", "#ba0000");
+        showSuccessMessage("Erreur d'envoi du message ?!", "#ba0000");
     },
-  });
+});
 
   return false;
 });

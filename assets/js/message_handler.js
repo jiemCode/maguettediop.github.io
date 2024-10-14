@@ -17,30 +17,27 @@ $("#submitButtonId").click(function () {
 
   var bearerToken = "lIuGU1fkl2yb1GwKKhSyXj34DOWiMDITdaaL9nkTZNQhFoe8TlZgb3NKPTTXWVPL"
 
-  // Collect form data and convert to JSON
-const formData = $("#idForm").serializeArray();
-const jsonData = {};
-
-formData.forEach(function(item) {
-    jsonData[item.name] = item.value;
-});
-
-// AJAX request
-$.ajax({
-    type: "POST",
-    url: url,
-    contentType: 'application/json',
-    headers: {
-        'Authorization': `Bearer ${bearerToken}`
-    },
-    data: JSON.stringify(jsonData),  // Convert the object to a JSON string
-    success: function (data) {
-        showSuccessMessage("Message envoyé ! Merci", "#4CAF50");
-    },
-    error: function (data) {
-        showSuccessMessage("Erreur d'envoi du message ?!", "#ba0000");
-    },
-});
+  // Get form data using FormData
+  const formElement = document.getElementById("idForm");
+  const formData = new FormData(formElement);
+  
+  // AJAX request
+  $.ajax({
+      type: "POST",
+      url: url,
+      headers: {
+          'Authorization': `Bearer ${bearerToken}`
+      },
+      processData: false, // Don't process the data into a query string
+      contentType: false, // Let jQuery set the correct Content-Type
+      data: formData, // Send the FormData object
+      success: function (data) {
+          showSuccessMessage("Message envoyé ! Merci", "#4CAF50");
+      },
+      error: function (data) {
+          showSuccessMessage("Erreur d'envoi du message ?!", "#ba0000");
+      },
+  });
 
   return false;
 });

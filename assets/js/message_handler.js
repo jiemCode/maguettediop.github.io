@@ -32,7 +32,7 @@ $("#submitButtonId").click(function (event) {
   // Now you can use jsonString in an AJAX request or wherever needed
   $.ajax({
     type: "POST",
-    url: "https://jiem.pythonanywhere.com/portfolio/message_handler",
+    url: "http://localhost:8080/portfolio/message_handler",
     contentType: "application/json",
     headers: {
       'Authorization': `Bearer ${bearerToken}`

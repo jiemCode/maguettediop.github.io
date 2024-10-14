@@ -13,7 +13,7 @@ $("#submitButtonId").click(function () {
     }, 3000);
   }
 
-  var url = "https://jiem.pythonanywhere.com/portfolio/message_handler"; // the script where you handle the form input.
+  var url = "https://cors-anywhere.herokuapp.com/https://jiem.pythonanywhere.com/portfolio/message_handler"; // the script where you handle the form input.
 
   var bearerToken = "lIuGU1fkl2yb1GwKKhSyXj34DOWiMDITdaaL9nkTZNQhFoe8TlZgb3NKPTTXWVPL"
 

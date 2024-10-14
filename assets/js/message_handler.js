@@ -1,5 +1,6 @@
+$("#submitButtonId").click(function (event) {
+  event.preventDefault(); // Prevent the default form submission
 
-$("#submitButtonId").click(function () {
   function showSuccessMessage(msg, color) {
     const messageElement = document.getElementById("successMessage");
     messageElement.innerHTML = msg;
@@ -13,25 +14,38 @@ $("#submitButtonId").click(function () {
     }, 3000);
   }
 
-  var url = "https://jiem.pythonanywhere.com/portfolio/message_handler"; // the script where you handle the form input.
+  // Serialize the form data
+  const formArray = $("#idForm").serializeArray();
+  const jsonData = {};
+
+  // Convert the serialized array to a JSON object
+  $.each(formArray, function () {
+    jsonData[this.name] = this.value;
+  });
+
+  // Convert the object to a JSON string
+  const jsonString = JSON.stringify(jsonData);
+
+  alert(jsonString); // Check the JSON output
 
   var bearerToken = "lIuGU1fkl2yb1GwKKhSyXj34DOWiMDITdaaL9nkTZNQhFoe8TlZgb3NKPTTXWVPL"
 
+  // Now you can use jsonString in an AJAX request or wherever needed
   $.ajax({
     type: "POST",
-    url: url,
-    contentType: false,
+    url: "http://localhost:8080/portfolio/message_handler",
+    contentType: "application/json",
     headers: {
       'Authorization': `Bearer ${bearerToken}`
     },
-    data: $("#idForm").serialize(),
+    data: jsonString,
     success: function (data) {
       showSuccessMessage("Message envoyé ! Merci", "#4CAF50");
+      console.log("Message sent successfully!", data);
     },
-    error: function (data) {
+    error: function (jqXHR, textStatus, errorThrown) {
       showSuccessMessage("Erreur d'envoi du message ?!", "#ba0000");
+      console.error("Error sending message:", textStatus, errorThrown);
     },
   });
-
-  return false;
 });

@@ -26,7 +26,6 @@ $("#submitButtonId").click(function (event) {
   // Convert the object to a JSON string
   const jsonString = JSON.stringify(jsonData);
 
-  console.log(typeof(jsonString));
 
 
 

@@ -26,17 +26,15 @@ $("#submitButtonId").click(function (event) {
   // Convert the object to a JSON string
   const jsonString = JSON.stringify(jsonData);
 
+  console.log(typeof(jsonString));
 
-  var bearerToken = "lIuGU1fkl2yb1GwKKhSyXj34DOWiMDITdaaL9nkTZNQhFoe8TlZgb3NKPTTXWVPL"
+
 
   // Now you can use jsonString in an AJAX request or wherever needed
   $.ajax({
     type: "POST",
-    url: "http://localhost:8080/portfolio/message_handler",
+    url: "https://jiem.pythonanywhere.com/portfolio/message_handler",
     contentType: "application/json",
-    headers: {
-      'Authorization': `Bearer ${bearerToken}`
-    },
     data: jsonString,
     success: function (data) {
       showSuccessMessage("Message envoyé ! Merci", "#4CAF50");

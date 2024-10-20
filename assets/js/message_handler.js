@@ -36,7 +36,7 @@ $("#submitButtonId").click(function (event) {
     contentType: "application/json",
     data: jsonString,
     beforeSend: function(data) {
-      showSuccessMessage("Envoi en cours !", "#4CAF50");
+      showSuccessMessage("Envoi en cours !", "#286dc7");
     },
     success: function (data) {
       showSuccessMessage("Message envoyé ! Merci", "#4CAF50");

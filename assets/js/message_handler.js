@@ -26,7 +26,6 @@ $("#submitButtonId").click(function (event) {
   // Convert the object to a JSON string
   const jsonString = JSON.stringify(jsonData);
 
-  console.log(typeof(jsonString));
 
 
 
@@ -36,6 +35,9 @@ $("#submitButtonId").click(function (event) {
     url: "https://jiem.pythonanywhere.com/portfolio/message_handler",
     contentType: "application/json",
     data: jsonString,
+    beforeSend: function (data) {
+      showSuccessMessage("Envi en cours !", "#286dc7");
+    },
     success: function (data) {
       showSuccessMessage("Message envoyé ! Merci", "#4CAF50");
       // console.log("Message sent successfully!", data);
